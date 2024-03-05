@@ -1,4 +1,6 @@
-import { LightningElement } from 'lwc';
+import { LightningElement, wire } from 'lwc';
+
+import queryAccountsByEmployeeNumber from '@salesforce/apex/AccountListControllerLwc.queryAccountsByEmployeeNumber';
 
 export default class AccountSearch extends LightningElement {
     numberOfEmployees = null;
@@ -10,4 +12,7 @@ export default class AccountSearch extends LightningElement {
     reset() {
         this.numberOfEmployees = null;
     }
+
+    @wire(queryAccountsByEmployeeNumber, {numberOfEmployees: '$numberOfEmployees'})
+    accounts;
 }
